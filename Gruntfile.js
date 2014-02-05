@@ -12,7 +12,8 @@ module.exports = function (grunt) {
                     requireConfig: {
                             baseUrl: '',
                             paths: {
-                                jquery: "node_modules/jquery/dist/jquery"
+                                jquery: "node_modules/jquery/dist/jquery",
+                                text: "lib/text"
                             }
                     }
                 }
