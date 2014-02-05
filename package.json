@@ -1,0 +1,26 @@
+{
+    "name": "bpmjs",
+    "description": "Library to handle BPMN 2.0 files",
+    "version": "0.1.0",
+    "author": {
+        "name": "marianoguerra",
+        "email": "mariano@marianoguerra.org",
+        "url": "http://marianoguerra.org/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/marianoguerra/bpmjs.git"
+    },
+    "scripts": {
+        "test": "grunt test"
+    },
+    "devDependencies": {
+        "grunt": "~0.4.2",
+        "grunt-contrib-jshint": "~0.2.0",
+        "grunt-contrib-jasmine": "~0.5.2",
+        "grunt-template-jasmine-requirejs": "~0.1.9"
+    },
+    "dependencies": {
+        "jquery": "1.11.0"
+    }
+}
