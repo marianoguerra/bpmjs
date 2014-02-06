@@ -54,31 +54,14 @@ require(["bpm", "svg"], function (bpm, mSVG) {
         });
 
         data.connections.forEach(function (connection) {
-            var line, shape1, shape2, x1, y1, x2, y2,
-                source = data.byId[connection.sourceRef],
-                target = data.byId[connection.targetRef];
-
-            if (!source || !target) {
-                console.error("source or target not found", connection, source,
-                              target);
-                return;
-            }
-
-            shape1 = source.shape;
-            shape2 = target.shape;
-
-            x1 = shape1.x + shape1.width / 2;
-            y1 = shape1.y + shape1.height / 2;
-
-            x2 = shape2.x + shape2.width / 2;
-            y2 = shape2.y + shape2.height / 2;
-
-            line = paper.line(x1, y1, x2, y2).stroke({width: 1, color: "#555"});
+            paper.polyline(connection.edges)
+                .fill("none")
+                .stroke({width: 1, color: "#555"});
 
             if (connection.name) {
                 paper.text(connection.name)
                     .font({family: 'Helvetica', size: fontSize})
-                    .center((x1 + x2) / 2, ((y1 + y2) / 2) - 10);
+                    .center(connection.cx, connection.cy - 10);
             }
         });
 

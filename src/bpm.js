@@ -2,11 +2,14 @@
 define([], function () {
     "use strict";
     var DI_NS = "http://www.omg.org/spec/BPMN/20100524/DI",
+        DI1_NS = "http://www.omg.org/spec/DD/20100524/DI",
         DC_NS = "http://www.omg.org/spec/DD/20100524/DC",
         MODEL_NS = "http://www.omg.org/spec/BPMN/20100524/MODEL",
 
         SHAPE = "BPMNShape",
+        EDGE = "BPMNEdge",
         BOUNDS = "Bounds",
+        WAYPOINT = "waypoint",
         CONN_TYPES = ["sequenceFlow"],
         MODELS = {
             "exclusiveGateway": ["id", "name", "default", "gatewayDirection"],
@@ -90,6 +93,23 @@ define([], function () {
         }
     }
 
+    function xmlToWayPoint(node) {
+        return [attrToFloatOr(node, "x", 0.0), attrToFloatOr(node, "y", 0.0)];
+    }
+
+    function xmlToEdge(node) {
+        var id = node.getAttribute("id"),
+            bpmnElement = node.getAttribute("bpmnElement"),
+            waypoints = map(node.getElementsByTagNameNS(DI1_NS, WAYPOINT),
+                            xmlToWayPoint);
+
+        return {
+            id: id,
+            bpmnElement: bpmnElement,
+            waypoints: waypoints
+        };
+    }
+
     function xmlToShape(node) {
         var bounds,
             result = {},
@@ -137,7 +157,7 @@ define([], function () {
     }
 
     function parseBpmn(xml) {
-        var seqFlows, shapes, type, node, nodes, i, len,
+        var seqFlows, shapes, edges, type, node, nodes, i, len,
             maxX = null, minX = null, maxY = null, minY = null,
             $xml = parseXml(xml),
             doc = $xml.documentElement,
@@ -162,6 +182,20 @@ define([], function () {
         }
 
         shapes = map(doc.getElementsByTagNameNS(DI_NS, SHAPE), xmlToShape);
+        edges = map(doc.getElementsByTagNameNS(DI_NS, EDGE), xmlToEdge);
+
+        edges.forEach(function (edge) {
+            var conn = byId[edge.bpmnElement];
+
+            if (conn) {
+                // add intermediate edges here, later we will add the first
+                // and last step from source and target
+                conn.edges = edge.waypoints.slice();
+            } else if (window.console) {
+                window.console.warn("conn for edge not found", edge, conn);
+            }
+        });
+
         shapes.forEach(function (shape) {
             var model = byId[shape.bpmnElement],
                 rightX = shape.x + shape.width,
@@ -189,10 +223,68 @@ define([], function () {
 
                 shape.isGateway = endsWith(shape.nodeType, "Gateway");
                 shape.isTask = endsWith(shape.nodeType, "Task");
-            } else {
+            } else if (window.console) {
+                window.console.warn("model for shape not found", shape, model);
+            }
+        });
+
+        connections.forEach(function (conn) {
+            var line, shape1, shape2, x1, y1, x2, y2, source, target,
+                edge1, edge2, edges, edgeCount, middle;
+
+            if (!conn.edges) {
                 if (window.console) {
-                    window.console.warn("model for shape not found", shape, model);
+                    window.console.warn("no edges for connection, calculating",
+                                        conn);
                 }
+
+                source = byId[conn.sourceRef];
+                target = byId[conn.targetRef];
+
+                if (!source || !target) {
+                    if (window.console) {
+                        window.console.error("source or target not found", conn,
+                                             source, target);
+                    }
+
+                    return;
+                }
+
+                shape1 = source.shape;
+                shape2 = target.shape;
+
+                x1 = shape1.x + shape1.width / 2;
+                y1 = shape1.y + shape1.height / 2;
+
+                x2 = shape2.x + shape2.width / 2;
+                y2 = shape2.y + shape2.height / 2;
+
+                conn.edges = [[x1, y1], [x2, y2]];
+            }
+
+            edges = conn.edges;
+            edgeCount = edges.length;
+            if (edgeCount === 2) {
+                edge1 = edges[0];
+                edge2 = edges[1];
+
+                conn.cx = (edge1[0] + edge2[0]) / 2;
+                conn.cy = (edge1[1] + edge2[1]) / 2;
+            } else if (edgeCount > 2) {
+                middle = Math.floor(edgeCount / 2);
+                edge1 = edges[middle];
+
+                if (edgeCount % 2 === 0) {
+                    edge2 = edges[middle + 1];
+                    conn.cx = (edge1[0] + edge2[0]) / 2;
+                    conn.cy = (edge1[1] + edge2[1]) / 2;
+                } else {
+                    conn.cx = edge1[0];
+                    conn.cy = edge1[1];
+                }
+
+            } else if (window.console) {
+                window.console.warn("no enough edges?", conn);
             }
         });
 
@@ -200,6 +292,7 @@ define([], function () {
             byId: byId,
             byType: byType,
             shapes: shapes,
+            edges: edges,
             connections: connections,
             stats: {
                 maxX: maxX,
@@ -225,7 +318,7 @@ define([], function () {
             factorX = factorY = Math.min(factorX, factorY);
         }
 
-        data.shapes.map(function (shape) {
+        data.shapes.forEach(function (shape) {
             shape.x -= minX;
             shape.x *= factorX;
 
@@ -237,6 +330,16 @@ define([], function () {
 
             shape.width *= factorX;
             shape.height *= factorY;
+        });
+
+        data.connections.forEach(function (conn) {
+            conn.cx = ((conn.cx - minX) * factorX) + offsetX;
+            conn.cy = ((conn.cy - minY) * factorY) + offsetY;
+            conn.edges.forEach(function (edge) {
+                edge[0] = ((edge[0] - minX) * factorX) + offsetX;
+                edge[1] = ((edge[1] - minY) * factorY) + offsetY;
+
+            });
         });
     }
 

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bonitaConnector="http://www.bonitasoft.org/studio/connector/definition/6.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di_1="http://www.omg.org/spec/DD/20100524/DI" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:model="http://www.omg.org/spec/BPMN/20100524/MODEL" xsi:schemaLocation="schemaLocation http://www.omg.org/spec/BPMN/20100524/MODEL schemas/BPMN20.xsd" exporter="BonitaSoft" exporterVersion="6.2.1" expressionLanguage="http://groovy.codehaus.org/" targetNamespace="http://bonitasoft.com/_mL8rIPOYEeKPb5TYgq2fwA">
   <model:collaboration id="_mL8rIPOYEeKPb5TYgq2fwA">
-    <model:participant id="_5FFPcI6HEeOOr89rV1tzXw" name="Request for proposal" processRef="_mM9XwPOYEeKPb5TYgq2fwA"/>
+    <model:participant id="_YBCzcI9bEeOYO-3_dxOKmg" name="Request for proposal" processRef="_mM9XwPOYEeKPb5TYgq2fwA"/>
     <model:participant id="_mNSu8POYEeKPb5TYgq2fwA" name="Employee actor">
       <model:documentation>Il s'agit d'un exemple d'acteur qui est associé à tous les utilisateurs d'ACME</model:documentation>
     </model:participant>
   </model:collaboration>
   <model:process id="_mM9XwPOYEeKPb5TYgq2fwA" name="Request for proposal">
-    <model:ioSpecification id="_5FKvAI6HEeOOr89rV1tzXw">
-      <model:inputSet id="_5FLWEI6HEeOOr89rV1tzXw"/>
-      <model:outputSet id="_5FLWEY6HEeOOr89rV1tzXw"/>
+    <model:ioSpecification id="_YBCzc49bEeOYO-3_dxOKmg">
+      <model:inputSet id="_YBCzdI9bEeOYO-3_dxOKmg"/>
+      <model:outputSet id="_YBCzdY9bEeOYO-3_dxOKmg"/>
     </model:ioSpecification>
     <model:laneSet id="Request for proposal_laneSet">
       <model:lane id="_mNWZUPOYEeKPb5TYgq2fwA" name="RFP manager">
@@ -33,13 +33,13 @@
     <model:exclusiveGateway id="_QbUUIP3PEeK2g5MIjNF0tg" name="Is new vendor?" default="_QbhvgP3PEeK2g5MIjNF0tg"/>
     <model:exclusiveGateway id="_QbYlkP3PEeK2g5MIjNF0tg" name="Vendor found?" default="_Qbky0P3PEeK2g5MIjNF0tg"/>
     <model:endEvent id="_QbZzsP3PEeK2g5MIjNF0tg" name="End - RFP failure">
-      <model:terminateEventDefinition id="_5FQ1oI6HEeOOr89rV1tzXw"/>
+      <model:terminateEventDefinition id="_YBDago9bEeOYO-3_dxOKmg"/>
     </model:endEvent>
     <model:exclusiveGateway id="_QbbB0P3PEeK2g5MIjNF0tg" name="Gateway13"/>
     <model:exclusiveGateway id="_QbcP8_3PEeK2g5MIjNF0tg" name="Is vendor approved?" default="_3Fzn8P3PEeK2g5MIjNF0tg"/>
     <model:exclusiveGateway id="_QbdeEP3PEeK2g5MIjNF0tg" name="Gateway12"/>
     <model:endEvent id="_QbfTQP3PEeK2g5MIjNF0tg" name="End - RFP completed">
-      <model:terminateEventDefinition id="_5FRcsI6HEeOOr89rV1tzXw"/>
+      <model:terminateEventDefinition id="_YBDah49bEeOYO-3_dxOKmg"/>
     </model:endEvent>
     <model:serviceTask id="_Qbf6UP3PEeK2g5MIjNF0tg" name="Notify of RFP failure"/>
     <model:startEvent id="_Roq4EP3PEeK2g5MIjNF0tg" name="Start"/>
@@ -50,109 +50,109 @@
     <model:userTask id="_AfFrgP3QEeK2g5MIjNF0tg" name="Select vendor"/>
     <model:userTask id="_CjPUkP3QEeK2g5MIjNF0tg" name="Approve vendor"/>
     <model:sequenceFlow id="_QbhvgP3PEeK2g5MIjNF0tg" name="No" sourceRef="_QbUUIP3PEeK2g5MIjNF0tg" targetRef="_QbdeEP3PEeK2g5MIjNF0tg">
-      <model:conditionExpression xsi:type="model:tFormalExpression" id="_5FYKYI6HEeOOr89rV1tzXw" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath"></model:conditionExpression>
+      <model:conditionExpression xsi:type="model:tFormalExpression" id="_YBEBlY9bEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath"></model:conditionExpression>
     </model:sequenceFlow>
     <model:sequenceFlow id="_QbjksP3PEeK2g5MIjNF0tg" name="" sourceRef="_AfFrgP3QEeK2g5MIjNF0tg" targetRef="_QbYlkP3PEeK2g5MIjNF0tg"/>
     <model:sequenceFlow id="_Qbky0P3PEeK2g5MIjNF0tg" name="Yes" sourceRef="_QbYlkP3PEeK2g5MIjNF0tg" targetRef="_QbUUIP3PEeK2g5MIjNF0tg">
-      <model:conditionExpression xsi:type="model:tFormalExpression" id="_5FamoI6HEeOOr89rV1tzXw" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath"></model:conditionExpression>
+      <model:conditionExpression xsi:type="model:tFormalExpression" id="_YBEBlo9bEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath"></model:conditionExpression>
     </model:sequenceFlow>
     <model:sequenceFlow id="_QblZ4P3PEeK2g5MIjNF0tg" name="No" sourceRef="_QbYlkP3PEeK2g5MIjNF0tg" targetRef="_QbbB0P3PEeK2g5MIjNF0tg">
-      <model:conditionExpression xsi:type="model:tFormalExpression" id="_5FamoY6HEeOOr89rV1tzXw" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath">false</model:conditionExpression>
+      <model:conditionExpression xsi:type="model:tFormalExpression" id="_YBEBl49bEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath">false</model:conditionExpression>
     </model:sequenceFlow>
     <model:sequenceFlow id="_QbmoAP3PEeK2g5MIjNF0tg" name="" sourceRef="_89nv4P3PEeK2g5MIjNF0tg" targetRef="_QbfTQP3PEeK2g5MIjNF0tg"/>
     <model:sequenceFlow id="_QbnPEP3PEeK2g5MIjNF0tg" name="" sourceRef="_QbbB0P3PEeK2g5MIjNF0tg" targetRef="_Qbf6UP3PEeK2g5MIjNF0tg"/>
     <model:sequenceFlow id="_QbodMP3PEeK2g5MIjNF0tg" name="" sourceRef="_-yWc4P3PEeK2g5MIjNF0tg" targetRef="__iWWcP3PEeK2g5MIjNF0tg"/>
     <model:sequenceFlow id="_QbpEQP3PEeK2g5MIjNF0tg" name="No" sourceRef="_QbcP8_3PEeK2g5MIjNF0tg" targetRef="_QbbB0P3PEeK2g5MIjNF0tg">
-      <model:conditionExpression xsi:type="model:tFormalExpression" id="_5Famoo6HEeOOr89rV1tzXw" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath">false</model:conditionExpression>
+      <model:conditionExpression xsi:type="model:tFormalExpression" id="_YBEBmI9bEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath">false</model:conditionExpression>
     </model:sequenceFlow>
     <model:sequenceFlow id="_Qbq5cP3PEeK2g5MIjNF0tg" name="" sourceRef="_QbdeEP3PEeK2g5MIjNF0tg" targetRef="_89nv4P3PEeK2g5MIjNF0tg"/>
     <model:sequenceFlow id="_Qbrghf3PEeK2g5MIjNF0tg" name="" sourceRef="__iWWcP3PEeK2g5MIjNF0tg" targetRef="_AfFrgP3QEeK2g5MIjNF0tg"/>
     <model:sequenceFlow id="_QbsuoP3PEeK2g5MIjNF0tg" name="" sourceRef="_Qbf6UP3PEeK2g5MIjNF0tg" targetRef="_QbZzsP3PEeK2g5MIjNF0tg"/>
     <model:sequenceFlow id="_Sg5gkP3PEeK2g5MIjNF0tg" name="" sourceRef="_Roq4EP3PEeK2g5MIjNF0tg" targetRef="_974H4P3PEeK2g5MIjNF0tg">
-      <model:conditionExpression xsi:type="model:tFormalExpression" id="_5FbNsI6HEeOOr89rV1tzXw" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath"></model:conditionExpression>
+      <model:conditionExpression xsi:type="model:tFormalExpression" id="_YBEooI9bEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath"></model:conditionExpression>
     </model:sequenceFlow>
     <model:sequenceFlow id="_X1FXAP3PEeK2g5MIjNF0tg" name="" sourceRef="_974H4P3PEeK2g5MIjNF0tg" targetRef="_-yWc4P3PEeK2g5MIjNF0tg">
-      <model:conditionExpression xsi:type="model:tFormalExpression" id="_5FbNsY6HEeOOr89rV1tzXw" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath"></model:conditionExpression>
+      <model:conditionExpression xsi:type="model:tFormalExpression" id="_YBEooY9bEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath"></model:conditionExpression>
     </model:sequenceFlow>
     <model:sequenceFlow id="_qGR2cP3PEeK2g5MIjNF0tg" name="Yes" sourceRef="_QbUUIP3PEeK2g5MIjNF0tg" targetRef="_CjPUkP3QEeK2g5MIjNF0tg">
-      <model:conditionExpression xsi:type="model:tFormalExpression" id="_5FbNso6HEeOOr89rV1tzXw" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath">false</model:conditionExpression>
+      <model:conditionExpression xsi:type="model:tFormalExpression" id="_YBEooo9bEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath">false</model:conditionExpression>
     </model:sequenceFlow>
     <model:sequenceFlow id="_sm4K8P3PEeK2g5MIjNF0tg" name="" sourceRef="_CjPUkP3QEeK2g5MIjNF0tg" targetRef="_QbcP8_3PEeK2g5MIjNF0tg">
-      <model:conditionExpression xsi:type="model:tFormalExpression" id="_5FbNs46HEeOOr89rV1tzXw" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath"></model:conditionExpression>
+      <model:conditionExpression xsi:type="model:tFormalExpression" id="_YBEoo49bEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath"></model:conditionExpression>
     </model:sequenceFlow>
     <model:sequenceFlow id="_3Fzn8P3PEeK2g5MIjNF0tg" name="Yes" sourceRef="_QbcP8_3PEeK2g5MIjNF0tg" targetRef="_QbdeEP3PEeK2g5MIjNF0tg">
-      <model:conditionExpression xsi:type="model:tFormalExpression" id="_5Fb0wI6HEeOOr89rV1tzXw" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath"></model:conditionExpression>
+      <model:conditionExpression xsi:type="model:tFormalExpression" id="_YBEopI9bEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath"></model:conditionExpression>
     </model:sequenceFlow>
   </model:process>
   <di:BPMNDiagram name="Request for proposal">
     <di:BPMNPlane id="plane__mL8rIPOYEeKPb5TYgq2fwA" bpmnElement="_mL8rIPOYEeKPb5TYgq2fwA">
       <di:BPMNShape id="_mNCQQPOYEeKPb5TYgq2fwA" bpmnElement="_mM9XwPOYEeKPb5TYgq2fwA" isHorizontal="true">
-        <dc:Bounds height="301.0" width="844.0" x="22.0" y="22.0"/>
-        <di:BPMNLabel id="_5FI50Y6HEeOOr89rV1tzXw" labelStyle="_5FI50I6HEeOOr89rV1tzXw"/>
+        <dc:Bounds height="400.0" width="1124.0" x="30.0" y="30.0"/>
+        <di:BPMNLabel id="_YBCzco9bEeOYO-3_dxOKmg" labelStyle="_YBCzcY9bEeOYO-3_dxOKmg"/>
       </di:BPMNShape>
       <di:BPMNShape id="_SCN9EY51EeOvAM6iznFRzg" bpmnElement="_mNWZUPOYEeKPb5TYgq2fwA" isHorizontal="true">
-        <dc:Bounds height="301.0" width="827.0" x="39.0" y="22.0"/>
-        <di:BPMNLabel id="_5FNLQI6HEeOOr89rV1tzXw" labelStyle="_5FI50I6HEeOOr89rV1tzXw"/>
+        <dc:Bounds height="400.0" width="1102.0" x="52.0" y="30.0"/>
+        <di:BPMNLabel id="_YBCzdo9bEeOYO-3_dxOKmg" labelStyle="_YBCzcY9bEeOYO-3_dxOKmg"/>
       </di:BPMNShape>
       <di:BPMNShape id="_QbU7MP3PEeK2g5MIjNF0tg" bpmnElement="_QbUUIP3PEeK2g5MIjNF0tg">
-        <dc:Bounds height="33.0" width="33.0" x="720.0" y="195.0"/>
-        <di:BPMNLabel id="_5FPngI6HEeOOr89rV1tzXw" labelStyle="_5FI50I6HEeOOr89rV1tzXw"/>
+        <dc:Bounds height="43.0" width="43.0" x="961.0" y="261.0"/>
+        <di:BPMNLabel id="_YBDagI9bEeOYO-3_dxOKmg" labelStyle="_YBCzcY9bEeOYO-3_dxOKmg"/>
       </di:BPMNShape>
       <di:BPMNShape id="_QbYllf3PEeK2g5MIjNF0tg" bpmnElement="_QbYlkP3PEeK2g5MIjNF0tg">
-        <dc:Bounds height="33.0" width="33.0" x="621.0" y="195.0"/>
-        <di:BPMNLabel id="_5FPngY6HEeOOr89rV1tzXw" labelStyle="_5FI50I6HEeOOr89rV1tzXw"/>
+        <dc:Bounds height="43.0" width="43.0" x="828.0" y="261.0"/>
+        <di:BPMNLabel id="_YBDagY9bEeOYO-3_dxOKmg" labelStyle="_YBCzcY9bEeOYO-3_dxOKmg"/>
       </di:BPMNShape>
       <di:BPMNShape id="_QbaawP3PEeK2g5MIjNF0tg" bpmnElement="_QbZzsP3PEeK2g5MIjNF0tg">
-        <dc:Bounds height="24.0" width="23.0" x="393.0" y="48.0"/>
-        <di:BPMNLabel id="_5FQ1oY6HEeOOr89rV1tzXw" labelStyle="_5FI50I6HEeOOr89rV1tzXw"/>
+        <dc:Bounds height="30.0" width="30.0" x="524.0" y="65.0"/>
+        <di:BPMNLabel id="_YBDag49bEeOYO-3_dxOKmg" labelStyle="_YBCzcY9bEeOYO-3_dxOKmg"/>
       </di:BPMNShape>
       <di:BPMNShape id="_QbbB1f3PEeK2g5MIjNF0tg" bpmnElement="_QbbB0P3PEeK2g5MIjNF0tg">
-        <dc:Bounds height="33.0" width="33.0" x="621.0" y="39.0"/>
-        <di:BPMNLabel id="_5FQ1oo6HEeOOr89rV1tzXw" labelStyle="_5FI50I6HEeOOr89rV1tzXw"/>
+        <dc:Bounds height="43.0" width="43.0" x="828.0" y="52.0"/>
+        <di:BPMNLabel id="_YBDahI9bEeOYO-3_dxOKmg" labelStyle="_YBCzcY9bEeOYO-3_dxOKmg"/>
       </di:BPMNShape>
       <di:BPMNShape id="_Qbc3AP3PEeK2g5MIjNF0tg" bpmnElement="_QbcP8_3PEeK2g5MIjNF0tg">
-        <dc:Bounds height="33.0" width="33.0" x="806.0" y="108.0"/>
-        <di:BPMNLabel id="_5FQ1o46HEeOOr89rV1tzXw" labelStyle="_5FI50I6HEeOOr89rV1tzXw"/>
+        <dc:Bounds height="43.0" width="43.0" x="1075.0" y="144.0"/>
+        <di:BPMNLabel id="_YBDahY9bEeOYO-3_dxOKmg" labelStyle="_YBCzcY9bEeOYO-3_dxOKmg"/>
       </di:BPMNShape>
       <di:BPMNShape id="_QbdeFf3PEeK2g5MIjNF0tg" bpmnElement="_QbdeEP3PEeK2g5MIjNF0tg">
-        <dc:Bounds height="33.0" width="33.0" x="891.0" y="195.0"/>
-        <di:BPMNLabel id="_5FQ1pI6HEeOOr89rV1tzXw" labelStyle="_5FI50I6HEeOOr89rV1tzXw"/>
+        <dc:Bounds height="43.0" width="43.0" x="1189.0" y="261.0"/>
+        <di:BPMNLabel id="_YBDaho9bEeOYO-3_dxOKmg" labelStyle="_YBCzcY9bEeOYO-3_dxOKmg"/>
       </di:BPMNShape>
       <di:BPMNShape id="_QbfTRf3PEeK2g5MIjNF0tg" bpmnElement="_QbfTQP3PEeK2g5MIjNF0tg">
-        <dc:Bounds height="23.0" width="23.0" x="1148.0" y="193.0"/>
-        <di:BPMNLabel id="_5FRcsY6HEeOOr89rV1tzXw" labelStyle="_5FI50I6HEeOOr89rV1tzXw"/>
+        <dc:Bounds height="30.0" width="30.0" x="1531.0" y="258.0"/>
+        <di:BPMNLabel id="_YBDaiI9bEeOYO-3_dxOKmg" labelStyle="_YBCzcY9bEeOYO-3_dxOKmg"/>
       </di:BPMNShape>
       <di:BPMNShape id="_QbghYP3PEeK2g5MIjNF0tg" bpmnElement="_Qbf6UP3PEeK2g5MIjNF0tg">
-        <dc:Bounds height="39.0" width="75.0" x="459.0" y="36.0"/>
-        <di:BPMNLabel id="_5FVHEI6HEeOOr89rV1tzXw" labelStyle="_5FI50I6HEeOOr89rV1tzXw"/>
+        <dc:Bounds height="50.0" width="100.0" x="612.0" y="49.0"/>
+        <di:BPMNLabel id="_YBDaiY9bEeOYO-3_dxOKmg" labelStyle="_YBCzcY9bEeOYO-3_dxOKmg"/>
       </di:BPMNShape>
       <di:BPMNShape id="_RostQP3PEeK2g5MIjNF0tg" bpmnElement="_Roq4EP3PEeK2g5MIjNF0tg">
-        <dc:Bounds height="23.0" width="23.0" x="71.0" y="203.0"/>
-        <di:BPMNLabel id="_5FVuII6HEeOOr89rV1tzXw" labelStyle="_5FI50I6HEeOOr89rV1tzXw"/>
+        <dc:Bounds height="30.0" width="30.0" x="95.0" y="271.0"/>
+        <di:BPMNLabel id="_YBDaio9bEeOYO-3_dxOKmg" labelStyle="_YBCzcY9bEeOYO-3_dxOKmg"/>
       </di:BPMNShape>
       <di:BPMNShape id="_89o-AP3PEeK2g5MIjNF0tg" bpmnElement="_89nv4P3PEeK2g5MIjNF0tg">
-        <dc:Bounds height="46.0" width="91.0" x="1005.0" y="195.0"/>
-        <di:BPMNLabel id="_5FVuIY6HEeOOr89rV1tzXw" labelStyle="_5FI50I6HEeOOr89rV1tzXw"/>
+        <dc:Bounds height="60.0" width="120.0" x="1341.0" y="261.0"/>
+        <di:BPMNLabel id="_YBDai49bEeOYO-3_dxOKmg" labelStyle="_YBCzcY9bEeOYO-3_dxOKmg"/>
       </di:BPMNShape>
       <di:BPMNShape id="_9759EP3PEeK2g5MIjNF0tg" bpmnElement="_974H4P3PEeK2g5MIjNF0tg">
-        <dc:Bounds height="39.0" width="76.0" x="156.0" y="195.0"/>
-        <di:BPMNLabel id="_5FWVMI6HEeOOr89rV1tzXw" labelStyle="_5FI50I6HEeOOr89rV1tzXw"/>
+        <dc:Bounds height="50.0" width="100.0" x="209.0" y="261.0"/>
+        <di:BPMNLabel id="_YBEBkI9bEeOYO-3_dxOKmg" labelStyle="_YBCzcY9bEeOYO-3_dxOKmg"/>
       </di:BPMNShape>
       <di:BPMNShape id="_-yYSEP3PEeK2g5MIjNF0tg" bpmnElement="_-yWc4P3PEeK2g5MIjNF0tg">
-        <dc:Bounds height="38.0" width="76.0" x="261.0" y="193.0"/>
-        <di:BPMNLabel id="_5FWVMY6HEeOOr89rV1tzXw" labelStyle="_5FI50I6HEeOOr89rV1tzXw"/>
+        <dc:Bounds height="50.0" width="100.0" x="349.0" y="258.0"/>
+        <di:BPMNLabel id="_YBEBkY9bEeOYO-3_dxOKmg" labelStyle="_YBCzcY9bEeOYO-3_dxOKmg"/>
       </di:BPMNShape>
       <di:BPMNShape id="__iXkkP3PEeK2g5MIjNF0tg" bpmnElement="__iWWcP3PEeK2g5MIjNF0tg">
-        <dc:Bounds height="38.0" width="76.0" x="384.0" y="193.0"/>
-        <di:BPMNLabel id="_5FW8QI6HEeOOr89rV1tzXw" labelStyle="_5FI50I6HEeOOr89rV1tzXw"/>
+        <dc:Bounds height="50.0" width="100.0" x="513.0" y="258.0"/>
+        <di:BPMNLabel id="_YBEBko9bEeOYO-3_dxOKmg" labelStyle="_YBCzcY9bEeOYO-3_dxOKmg"/>
       </di:BPMNShape>
       <di:BPMNShape id="_AfG5o_3QEeK2g5MIjNF0tg" bpmnElement="_AfFrgP3QEeK2g5MIjNF0tg">
-        <dc:Bounds height="39.0" width="75.0" x="507.0" y="195.0"/>
-        <di:BPMNLabel id="_5FW8QY6HEeOOr89rV1tzXw" labelStyle="_5FI50I6HEeOOr89rV1tzXw"/>
+        <dc:Bounds height="50.0" width="100.0" x="676.0" y="261.0"/>
+        <di:BPMNLabel id="_YBEBk49bEeOYO-3_dxOKmg" labelStyle="_YBCzcY9bEeOYO-3_dxOKmg"/>
       </di:BPMNShape>
       <di:BPMNShape id="_CjQisP3QEeK2g5MIjNF0tg" bpmnElement="_CjPUkP3QEeK2g5MIjNF0tg">
-        <dc:Bounds height="38.0" width="76.0" x="699.0" y="108.0"/>
-        <di:BPMNLabel id="_5FW8Qo6HEeOOr89rV1tzXw" labelStyle="_5FI50I6HEeOOr89rV1tzXw"/>
+        <dc:Bounds height="50.0" width="100.0" x="933.0" y="144.0"/>
+        <di:BPMNLabel id="_YBEBlI9bEeOYO-3_dxOKmg" labelStyle="_YBCzcY9bEeOYO-3_dxOKmg"/>
       </di:BPMNShape>
       <di:BPMNEdge id="_QbiWkP3PEeK2g5MIjNF0tg" bpmnElement="_QbhvgP3PEeK2g5MIjNF0tg">
         <di_1:waypoint x="1004.0" y="282.0"/>
@@ -221,7 +221,7 @@
         <di_1:waypoint x="1210.0" y="261.0"/>
       </di:BPMNEdge>
     </di:BPMNPlane>
-    <di:BPMNLabelStyle id="_5FI50I6HEeOOr89rV1tzXw">
+    <di:BPMNLabelStyle id="_YBCzcY9bEeOYO-3_dxOKmg">
       <dc:Font isBold="false" isItalic="false" isStrikeThrough="false" isUnderline="false" name="Segoe UI" size="9.0"/>
     </di:BPMNLabelStyle>
   </di:BPMNDiagram>
