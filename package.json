@@ -21,6 +21,5 @@
         "grunt-template-jasmine-requirejs": "~0.1.9"
     },
     "dependencies": {
-        "jquery": "1.11.0"
     }
 }

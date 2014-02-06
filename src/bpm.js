@@ -1,5 +1,5 @@
-/*global define*/
-define(['jquery'], function ($) {
+/*global define, window*/
+define([], function () {
     "use strict";
     var DI_NS = "http://www.omg.org/spec/BPMN/20100524/DI",
         DC_NS = "http://www.omg.org/spec/DD/20100524/DC",
@@ -35,6 +35,27 @@ define(['jquery'], function ($) {
             "adHocSubProcess": ["id", "name"],
             "callActivity": ["id", "name"]
         };
+
+    function parseXml(data) {
+        var xml, tmp;
+        if (!data || typeof data !== "string") {
+            return null;
+        }
+
+        // Support: IE9
+        try {
+            tmp = new window.DOMParser();
+            xml = tmp.parseFromString(data, "text/xml");
+        } catch ( e ) {
+            xml = undefined;
+        }
+
+        if (!xml || xml.getElementsByTagName("parsererror").length) {
+            throw new Error("Invalid XML: " + data);
+        }
+
+        return xml;
+    }
 
     function xmlToObject(type, fields) {
         return function (node) {
@@ -107,9 +128,9 @@ define(['jquery'], function ($) {
         return result;
     }
 
-    function parseXml(xml) {
+    function parseBpmn(xml) {
         var seqFlows, shapes, type, node, nodes, i, len,
-            $xml = $.parseXML(xml),
+            $xml = parseXml(xml),
             doc = $xml.documentElement,
             connections = [],
             byId = {},
@@ -144,5 +165,5 @@ define(['jquery'], function ($) {
         };
     }
 
-    return {parseXml: parseXml};
+    return {parseBpmn: parseBpmn};
 });

@@ -6,12 +6,12 @@ define(['src/bpm', 'text!test-data/rfp.bpmn', 'text!test-data/recruit.bpmn',
 
     describe('bpmjs', function () {
 
-        it('should have a parseXml function', function () {
-            expect(typeof bpm.parseXml).toEqual("function");
+        it('should have a parseBpmn function', function () {
+            expect(typeof bpm.parseBpmn).toEqual("function");
         });
 
         it('should parse rfp (bonita) xml', function () {
-            var model = bpm.parseXml(rfpXml);
+            var model = bpm.parseBpmn(rfpXml);
 
             expect(model).toBeDefined();
             expect(model.connections.length).toBe(16);
@@ -24,7 +24,7 @@ define(['src/bpm', 'text!test-data/rfp.bpmn', 'text!test-data/recruit.bpmn',
         });
 
         it('should parse recruit (bonita) xml', function () {
-            var model = bpm.parseXml(recruitXml);
+            var model = bpm.parseBpmn(recruitXml);
 
             expect(model).toBeDefined();
             expect(model.connections.length).toBe(37);
@@ -38,7 +38,7 @@ define(['src/bpm', 'text!test-data/rfp.bpmn', 'text!test-data/recruit.bpmn',
         });
 
         it('should parse evaluation (jboss) xml', function () {
-            var model = bpm.parseXml(evaluationXml);
+            var model = bpm.parseBpmn(evaluationXml);
 
             expect(model).toBeDefined();
             expect(model.connections.length).toBe(7);
