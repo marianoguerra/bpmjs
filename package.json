@@ -21,5 +21,6 @@
         "grunt-template-jasmine-requirejs": "~0.1.9"
     },
     "dependencies": {
+        "requirejs": "~2.1.10"
     }
 }

@@ -1,3 +1,4 @@
+/*global module, require*/
 module.exports = function (grunt) {
     'use strict';
 
@@ -10,11 +11,12 @@ module.exports = function (grunt) {
                 template: require('grunt-template-jasmine-requirejs'),
                 templateOptions: {
                     requireConfig: {
-                            baseUrl: '',
-                            paths: {
-                                jquery: "node_modules/jquery/dist/jquery",
-                                text: "lib/text"
-                            }
+                        baseUrl: '',
+                        paths: {
+                            jquery: "node_modules/jquery/dist/jquery",
+                            raphael: "node_modules/raphael/raphael",
+                            text: "lib/text"
+                        }
                     }
                 }
             }

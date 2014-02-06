@@ -7,8 +7,6 @@ define([], function () {
 
         SHAPE = "BPMNShape",
         BOUNDS = "Bounds",
-        LANE_SET = "laneSet",
-        LANE = "lane",
         CONN_TYPES = ["sequenceFlow"],
         MODELS = {
             "exclusiveGateway": ["id", "name", "default", "gatewayDirection"],
@@ -18,6 +16,9 @@ define([], function () {
 
             "sequenceFlow": ["id", "name", "sourceRef", "targetRef",
                 "isImmediate"],
+
+            "laneSet": ["id"],
+            "lane": ["id", "name"],
 
             "startEvent": ["id", "name"],
             "endEvent": ["id", "name"],
@@ -128,8 +129,16 @@ define([], function () {
         return result;
     }
 
+    function endsWith(str, searchString, position) {
+        position = position || str.length;
+        position = position - searchString.length;
+        var lastIndex = str.lastIndexOf(searchString);
+        return lastIndex !== -1 && lastIndex === position;
+    }
+
     function parseBpmn(xml) {
         var seqFlows, shapes, type, node, nodes, i, len,
+            maxX = null, minX = null, maxY = null, minY = null,
             $xml = parseXml(xml),
             doc = $xml.documentElement,
             connections = [],
@@ -154,16 +163,85 @@ define([], function () {
 
         shapes = map(doc.getElementsByTagNameNS(DI_NS, SHAPE), xmlToShape);
         shapes.forEach(function (shape) {
-            shape.model = byId[shape.bpmnElement] || null;
+            var model = byId[shape.bpmnElement],
+                rightX = shape.x + shape.width,
+                bottomY = shape.y + shape.height;
+
+            if (maxX === null || rightX > maxX) {
+                maxX = rightX;
+            }
+
+            if (maxY === null || bottomY > maxY) {
+                maxY = bottomY;
+            }
+
+            if (minX === null || shape.x < minX) {
+                minX = shape.x;
+            }
+
+            if (minY === null || shape.y < minY) {
+                minY = shape.y;
+            }
+
+            if (model) {
+                model.shape = shape;
+                shape.nodeType = model.nodeType;
+
+                shape.isGateway = endsWith(shape.nodeType, "Gateway");
+                shape.isTask = endsWith(shape.nodeType, "Task");
+            } else {
+                if (window.console) {
+                    window.console.warn("model for shape not found", shape, model);
+                }
+            }
         });
 
         return {
             byId: byId,
             byType: byType,
             shapes: shapes,
-            connections: connections
+            connections: connections,
+            stats: {
+                maxX: maxX,
+                minX: minX,
+                maxY: maxY,
+                minY: minY,
+                relativeWidth: maxX - minX,
+                relativeHeight: maxY - minY
+            }
         };
     }
 
-    return {parseBpmn: parseBpmn};
+    function scaleToFit(data, height, width, mantainAspectRatio, offsetX, offsetY) {
+        offsetX = typeof offsetX === "number" ? offsetX : 10;
+        offsetY = typeof offsetY === "number" ? offsetY : 10;
+
+        var factorX = width / ((data.stats.relativeWidth || 1) + offsetX),
+            factorY = height / ((data.stats.relativeHeight || 1) + offsetY),
+            minX = data.stats.minX,
+            minY = data.stats.minY;
+
+        if (mantainAspectRatio) {
+            factorX = factorY = Math.min(factorX, factorY);
+        }
+
+        data.shapes.map(function (shape) {
+            shape.x -= minX;
+            shape.x *= factorX;
+
+            shape.y -= minY;
+            shape.y *= factorY;
+
+            shape.x += offsetX;
+            shape.y += offsetY;
+
+            shape.width *= factorX;
+            shape.height *= factorY;
+        });
+    }
+
+    return {
+        parseBpmn: parseBpmn,
+        scaleToFit: scaleToFit
+    };
 });

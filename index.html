@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>BPM.js</title>
+        <script src="node_modules/requirejs/require.js" data-main="app.js"></script>
+        <link rel="stylesheet" href="app.css" media="all" />
+    </head>
+    <body>
+        <h1>BPM.js - enterprise fun</h1>
+
+        <fieldset>
+            <div>
+                <label for="bpm-file">BPMN 2.0 File</label>
+                <input type="file" id="bpm-file">
+                <button id="bpm-submit">Send</button>
+            </div>
+        </fieldset>
+
+        <div id="output">
+            <h2>Image</h2>
+            <div id="image-output"></div>
+
+            <h2>JSON</h2>
+            <textarea id="json-output"></textarea>
+
+            <h2>XML</h2>
+            <textarea id="xml-output"></textarea>
+        </div>
+    </body>
+</html>

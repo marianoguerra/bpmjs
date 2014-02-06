@@ -1,0 +1,18 @@
+body{
+ background-color: #fefefe;
+ color: #222;
+ font-family: helvetica;
+ margin: 5em 10%;
+ width: 80%;
+}
+
+#image-output{
+    width: 100%;
+    height: 25em;
+    overflow: auto;
+}
+
+#json-output, #xml-output{
+    width: 100%;
+    height: 25em;
+}
