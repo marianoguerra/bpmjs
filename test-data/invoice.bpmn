@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bonitaConnector="http://www.bonitasoft.org/studio/connector/definition/6.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di_1="http://www.omg.org/spec/DD/20100524/DI" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:model="http://www.omg.org/spec/BPMN/20100524/MODEL" xsi:schemaLocation="schemaLocation http://www.omg.org/spec/BPMN/20100524/MODEL schemas/BPMN20.xsd" exporter="BonitaSoft" exporterVersion="6.2.1" expressionLanguage="http://groovy.codehaus.org/" targetNamespace="http://bonitasoft.com/_pnE1EP6XEeK2g5MIjNF0tg">
+  <model:import importType="http://www.w3.org/2001/XMLSchema" location="connectorDefs/email.defconnectors.xsd" namespace="http://www.bonitasoft.org/studio/connector/definition/6.0"/>
+  <model:collaboration id="_pnE1EP6XEeK2g5MIjNF0tg">
+    <model:participant id="_Og6XQI8qEeOYO-3_dxOKmg" name="Validation Process" processRef="_pnlLYP6XEeK2g5MIjNF0tg"/>
+  </model:collaboration>
+  <model:process id="_pnlLYP6XEeK2g5MIjNF0tg" name="Validation Process">
+    <model:ioSpecification id="_Og6XQ48qEeOYO-3_dxOKmg">
+      <model:inputSet id="_Og6XRI8qEeOYO-3_dxOKmg"/>
+      <model:outputSet id="_Og6XRY8qEeOYO-3_dxOKmg"/>
+    </model:ioSpecification>
+    <model:laneSet id="Validation Process_laneSet">
+      <model:lane id="_pn_bEP6XEeK2g5MIjNF0tg" name="Employee lane">
+        <model:flowNodeRef>_poOroP6XEeK2g5MIjNF0tg</model:flowNodeRef>
+        <model:flowNodeRef>_poaR0P6XEeK2g5MIjNF0tg</model:flowNodeRef>
+        <model:flowNodeRef>_pokp4P6XEeK2g5MIjNF0tg</model:flowNodeRef>
+        <model:flowNodeRef>_povB8P6XEeK2g5MIjNF0tg</model:flowNodeRef>
+        <model:flowNodeRef>_po6oIP6XEeK2g5MIjNF0tg</model:flowNodeRef>
+        <model:flowNodeRef>_ppt5YP6XEeK2g5MIjNF0tg</model:flowNodeRef>
+        <model:flowNodeRef>_pqDQkP6XEeK2g5MIjNF0tg</model:flowNodeRef>
+      </model:lane>
+    </model:laneSet>
+    <model:userTask id="_poOroP6XEeK2g5MIjNF0tg" name="Validation Level One"/>
+    <model:startEvent id="_poaR0P6XEeK2g5MIjNF0tg" name="Submit Invoice"/>
+    <model:exclusiveGateway id="_pokp4P6XEeK2g5MIjNF0tg" name="price" default="_psVvkP6XEeK2g5MIjNF0tg"/>
+    <model:userTask id="_povB8P6XEeK2g5MIjNF0tg" name="Validation Level Two"/>
+    <model:serviceTask id="_po6oIP6XEeK2g5MIjNF0tg" name="Notification Approved" implementation="BonitaConnector" operationRef="Execemail">
+      <model:ioSpecification id="_OjWAMI8qEeOYO-3_dxOKmg">
+        <model:dataInput id="_OjkpsI8qEeOYO-3_dxOKmg" itemSubjectRef="emailConnectorInput"/>
+        <model:dataOutput id="_OjlQwI8qEeOYO-3_dxOKmg" itemSubjectRef="emailConnectorOutput"/>
+        <model:inputSet id="_OjkpsY8qEeOYO-3_dxOKmg">
+          <model:dataInputRefs>_OjkpsI8qEeOYO-3_dxOKmg</model:dataInputRefs>
+        </model:inputSet>
+        <model:outputSet id="_OjlQwY8qEeOYO-3_dxOKmg">
+          <model:dataOutputRefs>_OjlQwI8qEeOYO-3_dxOKmg</model:dataOutputRefs>
+        </model:outputSet>
+      </model:ioSpecification>
+      <model:dataInputAssociation>
+        <model:targetRef>_OjkpsI8qEeOYO-3_dxOKmg</model:targetRef>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_OjlQwo8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Integer" language="http://www.w3.org/1999/XPath">465</model:from>
+          <model:to id="_Ojl30I8qEeOYO-3_dxOKmg">getDataInput('_OjkpsI8qEeOYO-3_dxOKmg')/bonitaConnector:smtpPort</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_Ojl30Y8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath"></model:from>
+          <model:to id="_Ojl30o8qEeOYO-3_dxOKmg">getDataInput('_OjkpsI8qEeOYO-3_dxOKmg')/bonitaConnector:to</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_Ojl3048qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath">smtp_host</model:from>
+          <model:to id="_Ojl31I8qEeOYO-3_dxOKmg">getDataInput('_OjkpsI8qEeOYO-3_dxOKmg')/bonitaConnector:smtpHost</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_Ojl31Y8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath">Notification Approved</model:from>
+          <model:to id="_Ojl31o8qEeOYO-3_dxOKmg">getDataInput('_OjkpsI8qEeOYO-3_dxOKmg')/bonitaConnector:subject</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_Ojl3148qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath"></model:from>
+          <model:to id="_Ojl32I8qEeOYO-3_dxOKmg">getDataInput('_OjkpsI8qEeOYO-3_dxOKmg')/bonitaConnector:bcc</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_Ojl32Y8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath"></model:from>
+          <model:to id="_Ojl32o8qEeOYO-3_dxOKmg">getDataInput('_OjkpsI8qEeOYO-3_dxOKmg')/bonitaConnector:from</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_Ojl3248qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath">bonitasoft2013</model:from>
+          <model:to id="_Ojl33I8qEeOYO-3_dxOKmg">getDataInput('_OjkpsI8qEeOYO-3_dxOKmg')/bonitaConnector:password</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_Ojl33Y8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath">&lt;html>
+&lt;body>
+&#xD;
+&lt;P  style=&quot;margin: 4;&quot;align = &quot;left&quot;>Dear Madam/Sir ${lastname} ,&lt;/P>&#xD;
+&lt;br>&#xD;
+&lt;P  style=&quot;margin: 4;&quot;align = &quot;left&quot;>Your invoice of amout ${price}€ has been approved.&lt;/P>&#xD;
+&lt;br>&#xD;
+&lt;P  style=&quot;margin: 4;&quot;align = &quot;left&quot;>The departement is : ${department}&lt;/P>&#xD;
+&lt;br>&#xD;
+&lt;P  style=&quot;margin: 4;&quot;align = &quot;left&quot;>Thank you.&lt;/P>&#xD;
+&#xD;
+&lt;/body>&lt;/html>&#xD;
+</model:from>
+          <model:to id="_Ojl33o8qEeOYO-3_dxOKmg">getDataInput('_OjkpsI8qEeOYO-3_dxOKmg')/bonitaConnector:message</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_Ojl3348qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath">true</model:from>
+          <model:to id="_Ojl34I8qEeOYO-3_dxOKmg">getDataInput('_OjkpsI8qEeOYO-3_dxOKmg')/bonitaConnector:sslSupport</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_Ojl34Y8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath">false</model:from>
+          <model:to id="_Ojl34o8qEeOYO-3_dxOKmg">getDataInput('_OjkpsI8qEeOYO-3_dxOKmg')/bonitaConnector:starttlsSupport</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_Ojl3448qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath"></model:from>
+          <model:to id="_Ojl35I8qEeOYO-3_dxOKmg">getDataInput('_OjkpsI8qEeOYO-3_dxOKmg')/bonitaConnector:replyTo</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_Ojl35Y8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath">bonitasoft@gmail.com</model:from>
+          <model:to id="_Ojl35o8qEeOYO-3_dxOKmg">getDataInput('_OjkpsI8qEeOYO-3_dxOKmg')/bonitaConnector:userName</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_Ojl3548qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath">true</model:from>
+          <model:to id="_Ojl36I8qEeOYO-3_dxOKmg">getDataInput('_OjkpsI8qEeOYO-3_dxOKmg')/bonitaConnector:html</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_Ojl36Y8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath"></model:from>
+          <model:to id="_Ojl36o8qEeOYO-3_dxOKmg">getDataInput('_OjkpsI8qEeOYO-3_dxOKmg')/bonitaConnector:cc</model:to>
+        </model:assignment>
+      </model:dataInputAssociation>
+    </model:serviceTask>
+    <model:serviceTask id="_ppt5YP6XEeK2g5MIjNF0tg" name="Notification Rejected" implementation="BonitaConnector" operationRef="Execemail">
+      <model:ioSpecification id="_OjoUEI8qEeOYO-3_dxOKmg">
+        <model:dataInput id="_OjoUEY8qEeOYO-3_dxOKmg" itemSubjectRef="emailConnectorInput"/>
+        <model:dataOutput id="_OjoUE48qEeOYO-3_dxOKmg" itemSubjectRef="emailConnectorOutput"/>
+        <model:inputSet id="_OjoUEo8qEeOYO-3_dxOKmg">
+          <model:dataInputRefs>_OjoUEY8qEeOYO-3_dxOKmg</model:dataInputRefs>
+        </model:inputSet>
+        <model:outputSet id="_OjoUFI8qEeOYO-3_dxOKmg">
+          <model:dataOutputRefs>_OjoUE48qEeOYO-3_dxOKmg</model:dataOutputRefs>
+        </model:outputSet>
+      </model:ioSpecification>
+      <model:dataInputAssociation>
+        <model:targetRef>_OjoUEY8qEeOYO-3_dxOKmg</model:targetRef>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_OjoUFY8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Integer" language="http://www.w3.org/1999/XPath">465</model:from>
+          <model:to id="_OjoUFo8qEeOYO-3_dxOKmg">getDataInput('_OjoUEY8qEeOYO-3_dxOKmg')/bonitaConnector:smtpPort</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_OjoUF48qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath"></model:from>
+          <model:to id="_OjoUGI8qEeOYO-3_dxOKmg">getDataInput('_OjoUEY8qEeOYO-3_dxOKmg')/bonitaConnector:to</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_OjoUGY8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath">smtp_host</model:from>
+          <model:to id="_OjoUGo8qEeOYO-3_dxOKmg">getDataInput('_OjoUEY8qEeOYO-3_dxOKmg')/bonitaConnector:smtpHost</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_OjoUG48qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath">Notification rejected</model:from>
+          <model:to id="_OjoUHI8qEeOYO-3_dxOKmg">getDataInput('_OjoUEY8qEeOYO-3_dxOKmg')/bonitaConnector:subject</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_OjoUHY8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath"></model:from>
+          <model:to id="_OjoUHo8qEeOYO-3_dxOKmg">getDataInput('_OjoUEY8qEeOYO-3_dxOKmg')/bonitaConnector:bcc</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_OjoUH48qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath"></model:from>
+          <model:to id="_OjoUII8qEeOYO-3_dxOKmg">getDataInput('_OjoUEY8qEeOYO-3_dxOKmg')/bonitaConnector:from</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_OjoUIY8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath">bonitasoft2013</model:from>
+          <model:to id="_OjoUIo8qEeOYO-3_dxOKmg">getDataInput('_OjoUEY8qEeOYO-3_dxOKmg')/bonitaConnector:password</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_OjoUI48qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath">&lt;html>
+&lt;body>
+&#xD;
+&lt;P  style=&quot;margin: 4;&quot;align = &quot;left&quot;>Dear Madam/Sir ${lastname} ,&lt;/P>&#xD;
+&lt;br>&#xD;
+&lt;P  style=&quot;margin: 4;&quot;align = &quot;left&quot;>Your invoice of amout ${price}€ has been rejected.&lt;/P>&#xD;
+&lt;br>&#xD;
+&lt;P  style=&quot;margin: 4;&quot;align = &quot;left&quot;>The departement is : ${department}&lt;/P>&#xD;
+&lt;br>&#xD;
+&lt;P  style=&quot;margin: 4;&quot;align = &quot;left&quot;>Thank you.&lt;/P>&#xD;
+&#xD;
+&lt;/body>&lt;/html>&#xD;
+</model:from>
+          <model:to id="_OjoUJI8qEeOYO-3_dxOKmg">getDataInput('_OjoUEY8qEeOYO-3_dxOKmg')/bonitaConnector:message</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_OjoUJY8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath">true</model:from>
+          <model:to id="_OjoUJo8qEeOYO-3_dxOKmg">getDataInput('_OjoUEY8qEeOYO-3_dxOKmg')/bonitaConnector:sslSupport</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_OjoUJ48qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath">false</model:from>
+          <model:to id="_OjoUKI8qEeOYO-3_dxOKmg">getDataInput('_OjoUEY8qEeOYO-3_dxOKmg')/bonitaConnector:starttlsSupport</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_OjoUKY8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath"></model:from>
+          <model:to id="_OjoUKo8qEeOYO-3_dxOKmg">getDataInput('_OjoUEY8qEeOYO-3_dxOKmg')/bonitaConnector:replyTo</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_OjoUK48qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath">bonitasoft@gmail.com</model:from>
+          <model:to id="_OjoULI8qEeOYO-3_dxOKmg">getDataInput('_OjoUEY8qEeOYO-3_dxOKmg')/bonitaConnector:userName</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_OjoULY8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath">true</model:from>
+          <model:to id="_OjoULo8qEeOYO-3_dxOKmg">getDataInput('_OjoUEY8qEeOYO-3_dxOKmg')/bonitaConnector:html</model:to>
+        </model:assignment>
+        <model:assignment>
+          <model:from xsi:type="model:tFormalExpression" id="_OjoUL48qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.String" language="http://www.w3.org/1999/XPath"></model:from>
+          <model:to id="_OjoUMI8qEeOYO-3_dxOKmg">getDataInput('_OjoUEY8qEeOYO-3_dxOKmg')/bonitaConnector:cc</model:to>
+        </model:assignment>
+      </model:dataInputAssociation>
+    </model:serviceTask>
+    <model:endEvent id="_pqDQkP6XEeK2g5MIjNF0tg" name="End">
+      <model:terminateEventDefinition id="_OjoUMo8qEeOYO-3_dxOKmg"/>
+    </model:endEvent>
+    <model:sequenceFlow id="_pqShIP6XEeK2g5MIjNF0tg" name="" sourceRef="_poaR0P6XEeK2g5MIjNF0tg" targetRef="_poOroP6XEeK2g5MIjNF0tg"/>
+    <model:sequenceFlow id="_pqhKoP6XEeK2g5MIjNF0tg" name="Approved" sourceRef="_poOroP6XEeK2g5MIjNF0tg" targetRef="_pokp4P6XEeK2g5MIjNF0tg">
+      <model:conditionExpression xsi:type="model:tFormalExpression" id="_OjoUNI8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath">false</model:conditionExpression>
+    </model:sequenceFlow>
+    <model:sequenceFlow id="_pqyQYP6XEeK2g5MIjNF0tg" name="> maxAmount" sourceRef="_pokp4P6XEeK2g5MIjNF0tg" targetRef="_povB8P6XEeK2g5MIjNF0tg">
+      <model:conditionExpression xsi:type="model:tFormalExpression" id="_OjoUNY8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath">false</model:conditionExpression>
+    </model:sequenceFlow>
+    <model:sequenceFlow id="_prBg8P6XEeK2g5MIjNF0tg" name="approved" sourceRef="_povB8P6XEeK2g5MIjNF0tg" targetRef="_po6oIP6XEeK2g5MIjNF0tg">
+      <model:conditionExpression xsi:type="model:tFormalExpression" id="_Ojo7II8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath">false</model:conditionExpression>
+    </model:sequenceFlow>
+    <model:sequenceFlow id="_prQxgP6XEeK2g5MIjNF0tg" name="rejected" sourceRef="_povB8P6XEeK2g5MIjNF0tg" targetRef="_ppt5YP6XEeK2g5MIjNF0tg">
+      <model:conditionExpression xsi:type="model:tFormalExpression" id="_Ojo7IY8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath"></model:conditionExpression>
+    </model:sequenceFlow>
+    <model:sequenceFlow id="_prhQMP6XEeK2g5MIjNF0tg" name="" sourceRef="_po6oIP6XEeK2g5MIjNF0tg" targetRef="_pqDQkP6XEeK2g5MIjNF0tg">
+      <model:conditionExpression xsi:type="model:tFormalExpression" id="_Ojo7Io8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath"></model:conditionExpression>
+    </model:sequenceFlow>
+    <model:sequenceFlow id="_pryV8P6XEeK2g5MIjNF0tg" name="" sourceRef="_ppt5YP6XEeK2g5MIjNF0tg" targetRef="_pqDQkP6XEeK2g5MIjNF0tg">
+      <model:conditionExpression xsi:type="model:tFormalExpression" id="_Ojo7I48qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath"></model:conditionExpression>
+    </model:sequenceFlow>
+    <model:sequenceFlow id="_psDbsP6XEeK2g5MIjNF0tg" name="rejected" sourceRef="_poOroP6XEeK2g5MIjNF0tg" targetRef="_ppt5YP6XEeK2g5MIjNF0tg">
+      <model:conditionExpression xsi:type="model:tFormalExpression" id="_Ojo7JI8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath"></model:conditionExpression>
+    </model:sequenceFlow>
+    <model:sequenceFlow id="_psVvkP6XEeK2g5MIjNF0tg" name="&lt; maxAmount" sourceRef="_pokp4P6XEeK2g5MIjNF0tg" targetRef="_po6oIP6XEeK2g5MIjNF0tg">
+      <model:conditionExpression xsi:type="model:tFormalExpression" id="_Ojo7JY8qEeOYO-3_dxOKmg" evaluatesToTypeRef="java:java.lang.Boolean" language="http://www.w3.org/1999/XPath"></model:conditionExpression>
+    </model:sequenceFlow>
+  </model:process>
+  <model:itemDefinition id="emailConnectorInput" structureRef="bonitaConnector:emailInputType"/>
+  <model:message id="emailConnectorMessageInput" itemRef="emailConnectorInput"/>
+  <model:itemDefinition id="emailConnectorOutput" structureRef="bonitaConnector:emailOutputType"/>
+  <model:message id="emailConnectorMessageOutput" itemRef="emailConnectorOutput"/>
+  <model:interface id="email_Bonita_Connector_Interface" name="email_Bonita_Connector_Interface">
+    <model:operation id="Execemail" name="Execemail">
+      <model:inMessageRef>emailConnectorMessageInput</model:inMessageRef>
+      <model:outMessageRef>emailConnectorMessageOutput</model:outMessageRef>
+    </model:operation>
+  </model:interface>
+  <model:itemDefinition id="emailConnectorInput" structureRef="bonitaConnector:emailInputType"/>
+  <model:message id="emailConnectorMessageInput" itemRef="emailConnectorInput"/>
+  <model:itemDefinition id="emailConnectorOutput" structureRef="bonitaConnector:emailOutputType"/>
+  <model:message id="emailConnectorMessageOutput" itemRef="emailConnectorOutput"/>
+  <model:interface id="email_Bonita_Connector_Interface" name="email_Bonita_Connector_Interface">
+    <model:operation id="Execemail" name="Execemail">
+      <model:inMessageRef>emailConnectorMessageInput</model:inMessageRef>
+      <model:outMessageRef>emailConnectorMessageOutput</model:outMessageRef>
+    </model:operation>
+  </model:interface>
+  <di:BPMNDiagram name="Invoice_Validation">
+    <di:BPMNPlane id="plane__pnE1EP6XEeK2g5MIjNF0tg" bpmnElement="_pnE1EP6XEeK2g5MIjNF0tg">
+      <di:BPMNShape id="_pnnAkP6XEeK2g5MIjNF0tg" bpmnElement="_pnlLYP6XEeK2g5MIjNF0tg" isHorizontal="true">
+        <dc:Bounds height="200.0" width="685.0" x="15.0" y="15.0"/>
+        <di:BPMNLabel id="_Og6XQo8qEeOYO-3_dxOKmg" labelStyle="_Og6XQY8qEeOYO-3_dxOKmg"/>
+      </di:BPMNShape>
+      <di:BPMNShape id="_InYYFo8qEeOYO-3_dxOKmg" bpmnElement="_pn_bEP6XEeK2g5MIjNF0tg" isHorizontal="true">
+        <dc:Bounds height="200.0" width="674.0" x="26.0" y="15.0"/>
+        <di:BPMNLabel id="_Og6-UI8qEeOYO-3_dxOKmg" labelStyle="_Og6XQY8qEeOYO-3_dxOKmg"/>
+      </di:BPMNShape>
+      <di:BPMNShape id="_poP5wP6XEeK2g5MIjNF0tg" bpmnElement="_poOroP6XEeK2g5MIjNF0tg">
+        <dc:Bounds height="26.0" width="51.0" x="128.0" y="88.0"/>
+        <di:BPMNLabel id="_Og6-UY8qEeOYO-3_dxOKmg" labelStyle="_Og6XQY8qEeOYO-3_dxOKmg"/>
+      </di:BPMNShape>
+      <di:BPMNShape id="_pobf8P6XEeK2g5MIjNF0tg" bpmnElement="_poaR0P6XEeK2g5MIjNF0tg">
+        <dc:Bounds height="16.0" width="16.0" x="73.0" y="93.0"/>
+        <di:BPMNLabel id="_Og6-Uo8qEeOYO-3_dxOKmg" labelStyle="_Og6XQY8qEeOYO-3_dxOKmg"/>
+      </di:BPMNShape>
+      <di:BPMNShape id="_polQ8P6XEeK2g5MIjNF0tg" bpmnElement="_pokp4P6XEeK2g5MIjNF0tg">
+        <dc:Bounds height="22.0" width="22.0" x="252.0" y="92.0"/>
+        <di:BPMNLabel id="_Og6-U48qEeOYO-3_dxOKmg" labelStyle="_Og6XQY8qEeOYO-3_dxOKmg"/>
+      </di:BPMNShape>
+      <di:BPMNShape id="_powQEP6XEeK2g5MIjNF0tg" bpmnElement="_povB8P6XEeK2g5MIjNF0tg">
+        <dc:Bounds height="25.0" width="51.0" x="337.0" y="91.0"/>
+        <di:BPMNLabel id="_Og6-VI8qEeOYO-3_dxOKmg" labelStyle="_Og6XQY8qEeOYO-3_dxOKmg"/>
+      </di:BPMNShape>
+      <di:BPMNShape id="_po8dUP6XEeK2g5MIjNF0tg" bpmnElement="_po6oIP6XEeK2g5MIjNF0tg">
+        <dc:Bounds height="25.0" width="50.0" x="480.0" y="91.0"/>
+        <di:BPMNLabel id="_Ojl3648qEeOYO-3_dxOKmg" labelStyle="_Og6XQY8qEeOYO-3_dxOKmg"/>
+      </di:BPMNShape>
+      <di:BPMNShape id="_ppvHgP6XEeK2g5MIjNF0tg" bpmnElement="_ppt5YP6XEeK2g5MIjNF0tg">
+        <dc:Bounds height="26.0" width="50.0" x="480.0" y="154.0"/>
+        <di:BPMNLabel id="_OjoUMY8qEeOYO-3_dxOKmg" labelStyle="_Og6XQY8qEeOYO-3_dxOKmg"/>
+      </di:BPMNShape>
+      <di:BPMNShape id="_pqEesP6XEeK2g5MIjNF0tg" bpmnElement="_pqDQkP6XEeK2g5MIjNF0tg">
+        <dc:Bounds height="15.0" width="16.0" x="603.0" y="126.0"/>
+        <di:BPMNLabel id="_OjoUM48qEeOYO-3_dxOKmg" labelStyle="_Og6XQY8qEeOYO-3_dxOKmg"/>
+      </di:BPMNShape>
+      <di:BPMNEdge id="_pqTIMP6XEeK2g5MIjNF0tg" bpmnElement="_pqShIP6XEeK2g5MIjNF0tg">
+        <di_1:waypoint x="177.0" y="202.0"/>
+        <di_1:waypoint x="257.0" y="202.0"/>
+      </di:BPMNEdge>
+      <di:BPMNEdge id="_pqiYwP6XEeK2g5MIjNF0tg" bpmnElement="_pqhKoP6XEeK2g5MIjNF0tg">
+        <di_1:waypoint x="357.0" y="204.0"/>
+        <di_1:waypoint x="506.0" y="204.0"/>
+      </di:BPMNEdge>
+      <di:BPMNEdge id="_pqzegP6XEeK2g5MIjNF0tg" bpmnElement="_pqyQYP6XEeK2g5MIjNF0tg">
+        <di_1:waypoint x="547.0" y="206.0"/>
+        <di_1:waypoint x="675.0" y="206.0"/>
+      </di:BPMNEdge>
+      <di:BPMNEdge id="_prCvEP6XEeK2g5MIjNF0tg" bpmnElement="_prBg8P6XEeK2g5MIjNF0tg">
+        <di_1:waypoint x="775.0" y="207.0"/>
+        <di_1:waypoint x="960.0" y="207.0"/>
+      </di:BPMNEdge>
+      <di:BPMNEdge id="_prR_oP6XEeK2g5MIjNF0tg" bpmnElement="_prQxgP6XEeK2g5MIjNF0tg">
+        <di_1:waypoint x="765.0" y="232.0"/>
+        <di_1:waypoint x="765.0" y="314.0"/>
+        <di_1:waypoint x="960.0" y="314.0"/>
+      </di:BPMNEdge>
+      <di:BPMNEdge id="_prh3QP6XEeK2g5MIjNF0tg" bpmnElement="_prhQMP6XEeK2g5MIjNF0tg">
+        <di_1:waypoint x="1060.0" y="210.0"/>
+        <di_1:waypoint x="1213.0" y="210.0"/>
+        <di_1:waypoint x="1213.0" y="253.0"/>
+      </di:BPMNEdge>
+      <di:BPMNEdge id="_przkEP6XEeK2g5MIjNF0tg" bpmnElement="_pryV8P6XEeK2g5MIjNF0tg">
+        <di_1:waypoint x="1060.0" y="322.0"/>
+        <di_1:waypoint x="1213.0" y="322.0"/>
+        <di_1:waypoint x="1213.0" y="279.0"/>
+      </di:BPMNEdge>
+      <di:BPMNEdge id="_psEp0P6XEeK2g5MIjNF0tg" bpmnElement="_psDbsP6XEeK2g5MIjNF0tg">
+        <di_1:waypoint x="335.0" y="227.0"/>
+        <di_1:waypoint x="335.0" y="324.0"/>
+        <di_1:waypoint x="960.0" y="324.0"/>
+      </di:BPMNEdge>
+      <di:BPMNEdge id="_psW9sP6XEeK2g5MIjNF0tg" bpmnElement="_psVvkP6XEeK2g5MIjNF0tg">
+        <di_1:waypoint x="521.0" y="189.0"/>
+        <di_1:waypoint x="521.0" y="84.0"/>
+        <di_1:waypoint x="1013.0" y="84.0"/>
+        <di_1:waypoint x="1013.0" y="182.0"/>
+      </di:BPMNEdge>
+    </di:BPMNPlane>
+    <di:BPMNLabelStyle id="_Og6XQY8qEeOYO-3_dxOKmg">
+      <dc:Font isBold="false" isItalic="false" isStrikeThrough="false" isUnderline="false" name="Segoe UI" size="9.0"/>
+    </di:BPMNLabelStyle>
+  </di:BPMNDiagram>
+</model:definitions>
